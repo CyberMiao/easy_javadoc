@@ -191,8 +191,3 @@ public class MethodSettingsView extends AbstractTemplateSettingsView {
         templateTextArea.setText(template);
     }
 }
-
-
-        templateTextArea.setText(template);
-    }
-}

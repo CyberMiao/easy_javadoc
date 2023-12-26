@@ -35,6 +35,10 @@
         <applicationService serviceImplementation="com.star.easydoc.javadoc.service.variable.JavadocVariableGeneratorService"/>
         <applicationService serviceImplementation="com.star.easydoc.kdoc.service.variable.KdocVariableGeneratorService"/>
 
+        <applicationService serviceImplementation="com.star.easydoc.service.git.impl.CountLinesService"/>
+        <applicationService serviceImplementation="com.star.easydoc.service.git.impl.UserLinesService"/>
+        <applicationService serviceImplementation="com.star.easydoc.service.git.impl.CommitHistoryService"/>
+
         <applicationConfigurable id="easydoc.common.settings" displayName="EasyDoc" instance="com.star.easydoc.view.settings.CommonSettingsConfigurable"/>
 
         <applicationConfigurable parentId="easydoc.common.settings" id="easydoc.javadoc.settings" displayName="EasyDocJavadoc" instance="com.star.easydoc.view.settings.javadoc.JavadocSettingsConfigurable">
@@ -48,6 +52,19 @@
             <configurable parentId="easydoc.kdoc.settings" displayName="EasyDocKtMethodTemplate" instance="com.star.easydoc.view.settings.kdoc.template.KtMethodSettingsConfigurable"/>
             <configurable parentId="easydoc.kdoc.settings" displayName="EasyDocKtFieldTemplate" instance="com.star.easydoc.view.settings.kdoc.template.KtFieldSettingsConfigurable"/>
         </applicationConfigurable>
+
+        <toolWindow
+                id="countLines"
+                anchor="right"
+                factoryClass="com.star.easydoc.view.tool.CountLinesViewConfigurable"/>
+
+
+        <toolWindow
+                id="dateCommits"
+                anchor="bottom"
+                factoryClass="com.star.easydoc.view.tool.DateCommitsViewConfigurable"/>
+
+
 
     </extensions>
 
@@ -65,6 +82,13 @@
                 <keyboard-shortcut keymap="$default" first-keystroke="meta BACK_SLASH"/>
                 <keyboard-shortcut keymap="$default" first-keystroke="ctrl BACK_SLASH"/>
             </action>
+
+            <action id="GitLines"
+                    text="统计Git提交"
+                    class="com.star.easydoc.action.GitLinesAction"
+                    icon="AllIcons.Actions.EditScheme">
+            </action>
+
         </group>
         <action id="javadoc.generatorAll" class="com.star.easydoc.action.GenerateAllJavadocAction" text="生成文档注释">
             <add-to-group group-id="JavaGenerateGroup1" anchor="before" relative-to-action="GenerateEquals"/>
@@ -76,6 +100,8 @@
         </action>
     </actions>
 
+
     <depends>com.intellij.modules.java</depends>
     <depends>org.jetbrains.kotlin</depends>
+    <depends>Git4Idea</depends>
 </idea-plugin>

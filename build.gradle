@@ -27,7 +27,7 @@ targetCompatibility = 1.8
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    plugins = ['Kotlin']
+    plugins = ['Kotlin', 'git4idea']
 //    plugins 'java'
     version '2019.1'
     pluginName 'Easy Javadoc'
