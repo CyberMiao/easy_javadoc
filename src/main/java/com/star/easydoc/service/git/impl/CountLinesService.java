@@ -98,6 +98,14 @@ public class CountLinesService implements GitService {
     }
 
     /**
+     * 清空map
+     */
+    @Override
+    public void clear() {
+        linesMap.clear();
+    }
+
+    /**
      * 获取线地图
      *
      * @return map<字符串 、 线条>

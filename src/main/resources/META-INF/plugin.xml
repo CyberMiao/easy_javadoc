@@ -54,14 +54,16 @@
         </applicationConfigurable>
 
         <toolWindow
-                id="countLines"
+                id="CountLines"
                 anchor="right"
+                icon="AllIcons.Vcs.Vendors.Github"
                 factoryClass="com.star.easydoc.view.tool.CountLinesViewConfigurable"/>
 
 
         <toolWindow
-                id="dateCommits"
+                id="DateCommits"
                 anchor="bottom"
+                icon="AllIcons.Actions.Search"
                 factoryClass="com.star.easydoc.view.tool.DateCommitsViewConfigurable"/>
 
 

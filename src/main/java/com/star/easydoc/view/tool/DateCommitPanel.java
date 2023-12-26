@@ -36,6 +36,10 @@ public class DateCommitPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        if (data == null) {
+            // 数据为空
+            return;
+        }
         int barWidth = getWidth() / (2 * data.size()); // 减小矩形宽度
         int maxValue = getMaxValue();
 
@@ -44,12 +48,6 @@ public class DateCommitPanel extends JPanel {
 
         // 画横轴
         g.drawLine(50, getHeight() - 30, getWidth() - 30, getHeight() - 30);
-
-        // 绘制纵轴刻度和标签
-        for (int i = 0; i <= 10; i++) {
-            int y = getHeight() - 30 - i * (getHeight() - 60) / 10;
-            g.drawString(String.valueOf(maxValue * i / 10), 25, y + 5);
-        }
 
         // 绘制横轴刻度和标签
         int i = data.size() - 1;

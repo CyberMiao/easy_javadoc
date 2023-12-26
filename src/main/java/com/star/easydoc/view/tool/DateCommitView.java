@@ -78,12 +78,20 @@ public class DateCommitView {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                if (commitsMap.isEmpty()) {
+                    authorsName.removeAllItems();
+                    authorsName.revalidate();
+                    authorsName.repaint();
+                }
                 if (authorsName.getItemCount() == 0) {
+                    // 为空时，刷新
                     commitsMap = commitHistoryService.getCommitLogMap();
                     init();
                     authorsName.revalidate();
                     authorsName.repaint();
                 }
+
+                // 获取选中用户名的用户提交信息
                 String author = (String) authorsName.getSelectedItem();
                 Map<String, Integer> userCommits = commitsMap.get(author);
                 if (dataP != null) {

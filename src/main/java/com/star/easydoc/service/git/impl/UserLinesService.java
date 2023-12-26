@@ -105,6 +105,11 @@ public class UserLinesService implements GitService {
         return userStatsMap;
     }
 
+    @Override
+    public void clear() {
+        userStatsMap.clear();
+    }
+
     /**
      * @return map<字符串 、 用户统计信息>
      */

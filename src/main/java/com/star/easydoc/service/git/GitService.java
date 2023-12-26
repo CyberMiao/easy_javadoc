@@ -32,4 +32,9 @@ public interface GitService {
      */
     Map processResult(Project project, GitRepository repository, GitCommandResult result);
 
+    /**
+     * 清空数据
+     */
+    void clear();
+
 }

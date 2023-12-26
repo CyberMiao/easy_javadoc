@@ -88,6 +88,14 @@ public class CommitHistoryService implements GitService {
     }
 
     /**
+     * 清空map
+     */
+    @Override
+    public void clear() {
+        commitLogMap.clear();
+    }
+
+    /**
      * 获取提交日志映射
      *
      * @return map<字符串 、 map < 字符串 、 整数>>
