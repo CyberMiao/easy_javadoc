@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Git 服务
  *
- * @author admin
+ * @author
  * @date 2023/12/23
  */
 public interface GitService {

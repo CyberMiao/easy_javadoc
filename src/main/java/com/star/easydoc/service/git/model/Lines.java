@@ -1,4 +1,11 @@
 package com.star.easydoc.service.git.model;
+
+/**
+ * 文件行数统计
+ *
+ * @author
+ * @version 1.0
+ */
 public class Lines {
     /**
      * 总行数

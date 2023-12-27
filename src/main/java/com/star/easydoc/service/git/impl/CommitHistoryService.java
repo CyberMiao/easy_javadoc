@@ -1,6 +1,7 @@
 package com.star.easydoc.service.git.impl;
 
 import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.star.easydoc.service.git.GitService;
 import git4idea.commands.Git;
@@ -26,6 +27,8 @@ public class CommitHistoryService implements GitService {
      * 提交日志映射
      */
     private static Map<String, Map<String, Integer>> commitLogMap = new HashMap<>();
+
+    private static final Logger LOGGER = Logger.getInstance(CommitHistoryService.class);
 
     /**
      * do git 命令
@@ -80,7 +83,7 @@ public class CommitHistoryService implements GitService {
                     // 更新作者在该日期的提交次数
                     commitLogMap.get(author).merge(formattedDate, 1, Integer::sum);
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    LOGGER.error("结果格式错误");
                 }
             }
         }

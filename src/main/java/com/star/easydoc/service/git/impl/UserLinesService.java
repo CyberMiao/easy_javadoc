@@ -94,10 +94,8 @@ public class UserLinesService implements GitService {
                             userStatsMap.put(currentUsername, userStats);
                         }
                     }
-
-
                 } catch (NumberFormatException e) {
-                    e.printStackTrace();
+                    LOGGER.error("结果格式错误！");
                 }
             }
         }
@@ -105,15 +103,20 @@ public class UserLinesService implements GitService {
         return userStatsMap;
     }
 
+    /**
+     * 清空map
+     */
     @Override
     public void clear() {
         userStatsMap.clear();
     }
 
     /**
+     * 获取处理好的结果
+     *
      * @return map<字符串 、 用户统计信息>
      */
-    public Map<String, UserStats> getUserStatsMap() {
+    public static Map<String, UserStats> getUserStatsMap() {
         return userStatsMap;
     }
 

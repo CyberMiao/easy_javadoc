@@ -15,6 +15,12 @@ import java.util.*;
 
 import java.util.Map;
 
+/**
+ * 统计项目所有java文件的行数
+ *
+ * @author
+ * @version 1.0
+ */
 public class CountLinesService implements GitService {
 
     /**
@@ -53,9 +59,9 @@ public class CountLinesService implements GitService {
      * 处理结果
      *
      * @param project    项目
-     * @param repository 存储 库
+     * @param repository 库
      * @param result     结果
-     * @return map<字符串 、 线条>
+     * @return map<字符串 、 行数>
      */
     @Override
     public Map<String, Lines> processResult(Project project, GitRepository repository, GitCommandResult result) {
@@ -75,11 +81,11 @@ public class CountLinesService implements GitService {
     }
 
     /**
-     * 获取行数
+     * 获取某文件的行数
      *
      * @param project     项目
      * @param virtualFile 虚拟文件
-     * @return 线
+     * @return 行数
      */
     private Lines getLinesCount(Project project, VirtualFile virtualFile) {
         int totalLines = 0;
@@ -106,20 +112,20 @@ public class CountLinesService implements GitService {
     }
 
     /**
-     * 获取线地图
+     * 获取文件名称与行数的map
      *
-     * @return map<字符串 、 线条>
+     * @return map<字符串 、 行数>
      */
-    public Map<String, Lines> getLinesMap() {
+    public static Map<String, Lines> getLinesMap() {
         return linesMap;
     }
 
     /**
-     * 设置线图
+     * 设置map
      *
-     * @param linesMap 线路图
+     * @param linesMap map
      */
-    public void setLinesMap(Map<String, Lines> linesMap) {
+    public static void setLinesMap(Map<String, Lines> linesMap) {
         CountLinesService.linesMap = linesMap;
     }
 }

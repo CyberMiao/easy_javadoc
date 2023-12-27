@@ -8,10 +8,10 @@ import com.intellij.ui.content.ContentFactory;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * 日期提交视图可配置
+ * 日期提交视图配置
  *
  * @author admin
- * @date 2023/12/23
+ * @version  1.0
  */
 public class DateCommitsViewConfigurable implements ToolWindowFactory {
     /**

@@ -8,8 +8,10 @@ import com.intellij.ui.content.ContentFactory;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @authoer admin
- * @date 2023/12/23
+ * 右侧工具栏面板创建器
+ *
+ * @authoer
+ * @version  1.0
  */
 public class CountLinesViewConfigurable implements ToolWindowFactory {
 

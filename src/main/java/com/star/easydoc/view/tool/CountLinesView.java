@@ -1,5 +1,6 @@
 package com.star.easydoc.view.tool;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.star.easydoc.service.git.impl.CountLinesService;
 import com.star.easydoc.service.git.model.Lines;
 import com.star.easydoc.service.git.impl.UserLinesService;
@@ -8,16 +9,13 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.Map;
 
+/**
+ * 右侧统计工具栏视图
+ *
+ * @author
+ * @version 1.0
+ */
 public class CountLinesView {
-
-    /**
-     * 行统计
-     */
-    private CountLinesService lines = new CountLinesService();
-    /**
-     * 用户行数统计
-     */
-    private UserLinesService userLines = new UserLinesService();
 
     /**
      * 代码行数列
@@ -76,6 +74,7 @@ public class CountLinesView {
     private JPanel eastP;
     private JLabel count;
     private JLabel commit;
+    private static final Logger LOGGER = Logger.getInstance(CountLinesView.class);
 
     /**
      * 行计数统计视图
@@ -85,10 +84,10 @@ public class CountLinesView {
         //给刷新按钮添加事件监听
         refresh.addActionListener(e -> {
             // 获取统计后的代码量
-            Map<String, Lines> linesMap = lines.getLinesMap();
+            Map<String, Lines> linesMap = CountLinesService.getLinesMap();
             DefaultTableModel model = (DefaultTableModel) linesTable.getModel();
             model.setDataVector(getLinesContent(linesMap), linesColumns);
-            Map<String, UserStats> userStatsMap = userLines.getUserStatsMap();
+            Map<String, UserStats> userStatsMap = UserLinesService.getUserStatsMap();
             DefaultTableModel userModel = (DefaultTableModel) commitTable.getModel();
             userModel.setDataVector(getUserLinesContent(userStatsMap), commitColumn);
 
@@ -113,8 +112,8 @@ public class CountLinesView {
      * init 表
      */
     private void initTable() {
-        Map<String, Lines> linesMap = lines.getLinesMap();
-        Map<String, UserStats> userStatsMap = userLines.getUserStatsMap();
+        Map<String, Lines> linesMap = CountLinesService.getLinesMap();
+        Map<String, UserStats> userStatsMap = UserLinesService.getUserStatsMap();
 
         // 使用 DefaultTableModel 替代二维数组
         DefaultTableModel model = new DefaultTableModel(getLinesContent(linesMap), linesColumns);
@@ -127,24 +126,29 @@ public class CountLinesView {
     // 辅助方法，将 Map 转换为二维数组
     private Object[][] getLinesContent(Map<String, Lines> linesMap) {
         Object[][] content = new Object[linesMap.size()+1][4];
-        int i = 0;
-        int total = 0;
-        int blank = 0;
-        for (Map.Entry<String, Lines> entry : linesMap.entrySet()) {
-            String fileName = entry.getKey();
-            Lines lines = entry.getValue();
-            content[i][0] = fileName;
-            content[i][1] = lines.getTotalLines();
-            content[i][2] = lines.getBlankLines();
-            content[i][3] = lines.getBlankLines() / (double) lines.getTotalLines();
-            total += lines.getTotalLines();
-            blank += lines.getBlankLines();
-            i++;
+        try {
+            int i = 0;
+            int total = 0;
+            int blank = 0;
+            for (Map.Entry<String, Lines> entry : linesMap.entrySet()) {
+                String fileName = entry.getKey();
+                Lines lines = entry.getValue();
+                content[i][0] = fileName;
+                content[i][1] = lines.getTotalLines();
+                content[i][2] = lines.getBlankLines();
+                content[i][3] = lines.getBlankLines() / (double) lines.getTotalLines();
+                total += lines.getTotalLines();
+                blank += lines.getBlankLines();
+                i++;
+            }
+            content[i][0] = "Total";
+            content[i][1] = total;
+            content[i][2] = blank;
+            content[i][3] = (double) blank / (total == 0 ? 1 : total);
         }
-        content[i][0] = "Total";
-        content[i][1] = total;
-        content[i][2] = blank;
-        content[i][3] = blank / (double) total;
+        catch (Exception e) {
+            LOGGER.error("统计错误");
+        }
 
         return content;
     }

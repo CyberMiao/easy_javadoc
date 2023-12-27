@@ -14,10 +14,10 @@ import java.util.Set;
 
 
 /**
- * 日期提交视图
+ * 下方提交历史视图
  *
  * @author admin
- * @date 2023/12/23
+ * @version  1.0
  */
 public class DateCommitView {
     /**
